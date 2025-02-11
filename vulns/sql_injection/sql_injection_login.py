@@ -12,7 +12,7 @@ def sql_injection_login_page(request, app):
 
 def sql_injection_login_api(request, app):
     form = request.form
-
+    findme = '<:(|)'
     username = form.get('username')
     password = form.get('password')
     password_hash = _hash_password(password)
