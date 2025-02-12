@@ -20,12 +20,12 @@ def sql_injection_login_api(request, app):
 
     # Boo!
 
-    sql = "SELECT * FROM users WHERE username='{username}' AND password='{password_hash}'"
+   #  sql = "SELECT * FROM users WHERE username='{username}' AND password='{password_hash}'"
     
     # Gotta param this statement
 
-    #sql = "SELECT * FROM users WHERE username = %s AND password = %s"
-    #db_result = app.db_helper.execute_read(sql, (username, password_hash))
+    sql = "SELECT * FROM users WHERE username = %s AND password = %s"
+    db_result = app.db_helper.execute_read(sql, (username, password_hash))
 
     flask.render_template_string(username)
 
