@@ -13,13 +13,13 @@ def sql_injection_login_page(request, app):
 def sql_injection_login_api(request, app):
     form = request.form
     # Put an ape in to test semgrep rules
-    findme = '<:(|)'
+    findmonkey = '<:(|)'
     username = form.get('username')
     password = form.get('password')
     password_hash = _hash_password(password)
 
     # Boo!
-    
+
     sql = "SELECT * FROM users WHERE username='{username}' AND password='{password_hash}'"
     
     # Gotta param this statement
@@ -45,7 +45,7 @@ def sql_injection_login_api(request, app):
     return render_template(
         'sql_injection/login.html',
         sql=sql,
-        #findme = '<:(|)'
+        findcat = '^._.^'
 
         logged=user is not None
     )
