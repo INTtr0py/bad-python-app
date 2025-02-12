@@ -12,12 +12,21 @@ def sql_injection_login_page(request, app):
 
 def sql_injection_login_api(request, app):
     form = request.form
+    # Put an ape in to test semgrep rules
     findme = '<:(|)'
     username = form.get('username')
     password = form.get('password')
     password_hash = _hash_password(password)
 
-    sql = f"SELECT * FROM users WHERE username='{username}' AND password='{password_hash}'"
+    # Boo!
+    
+    sql = "SELECT * FROM users WHERE username='{username}' AND password='{password_hash}'"
+    
+    # Gotta param this statement
+
+    #sql = "SELECT * FROM users WHERE username = %s AND password = %s"
+    #db_result = app.db_helper.execute_read(sql, (username, password_hash))
+
     flask.render_template_string(username)
 
     db_result = app.db_helper.execute_read(sql)
@@ -36,6 +45,8 @@ def sql_injection_login_api(request, app):
     return render_template(
         'sql_injection/login.html',
         sql=sql,
+        #findme = '<:(|)'
+
         logged=user is not None
     )
 
